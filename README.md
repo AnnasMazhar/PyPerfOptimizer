@@ -2,16 +2,13 @@
 
 [![PyPI version](https://badge.fury.io/py/pyperfoptimizer.svg)](https://badge.fury.io/py/pyperfoptimizer)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 [![Python Versions](https://img.shields.io/pypi/pyversions/pyperfoptimizer.svg)](https://pypi.org/project/pyperfoptimizer/)
 [![Documentation Status](https://readthedocs.io/en/latest/?badge=latest)](https://pyperfoptimizer.readthedocs.io/)
 =======
->>>>>>> 9db7e9a (Add pip installable Python package for performance profiling.)
 =======
 [![Python Versions](https://img.shields.io/pypi/pyversions/pyperfoptimizer.svg)](https://pypi.org/project/pyperfoptimizer/)
 [![Documentation Status](https://readthedocs.io/en/latest/?badge=latest)](https://pyperfoptimizer.readthedocs.io/)
->>>>>>> aa2d10d (Update documentation with detailed performance test results and comparative benchmarks.  Add new automated optimization features.)
 
 A comprehensive Python package for unified performance profiling, visualization, and optimization.
 
@@ -48,11 +45,8 @@ Real-world applications show dramatic performance gains:
 
 For comprehensive benchmarks and case studies, see our [test results documentation](docs/test_results/).
 
-<<<<<<< HEAD
 =======
->>>>>>> 9db7e9a (Add pip installable Python package for performance profiling.)
 =======
->>>>>>> aa2d10d (Update documentation with detailed performance test results and comparative benchmarks.  Add new automated optimization features.)
 ## Installation
 
 ```bash
