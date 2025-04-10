@@ -20,11 +20,7 @@ A comprehensive Python package for unified performance profiling, visualization,
 - **Web Dashboard**: Browser-based dashboard for profile data exploration and visualization
 - **Decorator & Context Manager Support**: Simple API with multiple usage patterns
 - **Export & Sharing**: Export results to various formats for sharing and documentation
-
-<<<<<<< HEAD
-<<<<<<< HEAD
 =======
->>>>>>> aa2d10d (Update documentation with detailed performance test results and comparative benchmarks.  Add new automated optimization features.)
 ## 📈 Performance Improvements
 
 PyPerfOptimizer enables significant performance improvements across a wide range of applications:
