@@ -75,10 +75,10 @@ class MemoryProfiler:
     def start(self) -> None:
         """Start memory profiling."""
         self.start_time = time.time()
-        self.baseline_memory = memory_profiler.memory_usage()[0]
+        self.baseline_memory = get_memory_usage()
         
         # Instead of using LogFile which may not be available in all versions,
-        # we'll use memory_profiler's core functions directly
+        # we'll use our own memory sampling approach
         self._timestamps = []
         self._memory_samples = []
         
@@ -98,7 +98,7 @@ class MemoryProfiler:
         # Take a final sample
         elapsed = self.end_time - self.start_time
         self._timestamps.append(elapsed)
-        final_memory = memory_profiler.memory_usage()[0]
+        final_memory = get_memory_usage()
         self._memory_samples.append(final_memory)
         
         # Store the results
@@ -181,15 +181,16 @@ class MemoryProfiler:
             
             # Create a string buffer to capture the output
             import io
-            old_stdout = memory_profiler.sys.stdout
+            import sys
+            old_stdout = sys.stdout
             string_buffer = io.StringIO()
-            memory_profiler.sys.stdout = string_buffer
+            sys.stdout = string_buffer
             
             # Call the profiled function
             try:
                 profiled_func(*args, **kwargs)
             finally:
-                memory_profiler.sys.stdout = old_stdout
+                sys.stdout = old_stdout
                 
             # Parse the line-by-line profiling results
             output = string_buffer.getvalue()

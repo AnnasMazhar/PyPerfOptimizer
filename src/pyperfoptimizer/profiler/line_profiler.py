@@ -94,42 +94,109 @@ class LineProfiler:
         stats['timestamp'] = datetime.now().isoformat()
         stats['functions'] = []
         
-        # Process the statistics for each profiled function
-        for (filename, line_number, function_name), timings in self.results.items():
-            # Get the total time spent in this function
-            total_time = sum(timings) / 1e6  # Convert to seconds
-            
-            # Get the number of hits for each line
-            hits = self.line_profiler.code_map.get((filename, function_name), {})
-            
-            # Get the source code for each line
-            lines = {}
-            try:
-                if os.path.exists(filename):
-                    with open(filename, 'r') as f:
-                        all_lines = f.readlines()
+        # The structure of self.results can vary depending on the line_profiler version
+        # We need to handle different possible types
+        
+        try:
+            # Process the statistics for each profiled function
+            # Handle the case where results is a dictionary with code_map attribute
+            if hasattr(self.results, 'code_map'):
+                code_map = self.results.code_map
+                for (filename, function_name), lines_data in code_map.items():
+                    # Extract line number (first line of the function)
+                    line_number = min(lines_data.keys()) if lines_data else 0
+                    
+                    # Calculate total time for this function
+                    total_time = sum(time for _, time in lines_data.values()) / 1e6  # Convert to seconds
+                    
+                    # Get the source code for each line
+                    lines = {}
+                    try:
+                        if os.path.exists(filename):
+                            with open(filename, 'r') as f:
+                                all_lines = f.readlines()
+                                
+                            for line_idx, (hits_count, time) in lines_data.items():
+                                line_content = all_lines[line_idx - 1].rstrip() if 0 < line_idx <= len(all_lines) else ""
+                                lines[line_idx] = {
+                                    'hits': hits_count,
+                                    'time': time / 1e6,  # Convert to seconds
+                                    'time_per_hit': time / hits_count / 1e6 if hits_count > 0 else 0,
+                                    'percentage': (time / sum(time for _, time in lines_data.values()) * 100) 
+                                                  if sum(time for _, time in lines_data.values()) > 0 else 0,
+                                    'line_content': line_content
+                                }
+                    except Exception as e:
+                        lines['error'] = str(e)
                         
-                    for line_idx, (hits_count, time) in hits.items():
-                        line_content = all_lines[line_idx - 1].rstrip() if 0 < line_idx <= len(all_lines) else ""
-                        lines[line_idx] = {
-                            'hits': hits_count,
-                            'time': time / 1e6,  # Convert to seconds
-                            'time_per_hit': time / hits_count / 1e6 if hits_count > 0 else 0,
-                            'percentage': (time / sum(timings) * 100) if sum(timings) > 0 else 0,
-                            'line_content': line_content
-                        }
-            except Exception as e:
-                lines['error'] = str(e)
-                
-            function_stats = {
-                'filename': filename,
-                'line_number': line_number,
-                'function_name': function_name,
-                'total_time': total_time,
-                'lines': lines
-            }
+                    function_stats = {
+                        'filename': filename,
+                        'line_number': line_number,
+                        'function_name': function_name,
+                        'total_time': total_time,
+                        'lines': lines
+                    }
+                    
+                    stats['functions'].append(function_stats)
             
-            stats['functions'].append(function_stats)
+            # Handle the case where results is a dictionary with items() method
+            elif hasattr(self.results, 'items'):
+                for (filename, line_number, function_name), timings in self.results.items():
+                    # Get the total time spent in this function
+                    total_time = sum(timings) / 1e6  # Convert to seconds
+                    
+                    # Get the number of hits for each line
+                    hits = self.line_profiler.code_map.get((filename, function_name), {})
+                    
+                    # Get the source code for each line
+                    lines = {}
+                    try:
+                        if os.path.exists(filename):
+                            with open(filename, 'r') as f:
+                                all_lines = f.readlines()
+                                
+                            for line_idx, (hits_count, time) in hits.items():
+                                line_content = all_lines[line_idx - 1].rstrip() if 0 < line_idx <= len(all_lines) else ""
+                                lines[line_idx] = {
+                                    'hits': hits_count,
+                                    'time': time / 1e6,  # Convert to seconds
+                                    'time_per_hit': time / hits_count / 1e6 if hits_count > 0 else 0,
+                                    'percentage': (time / sum(timings) * 100) if sum(timings) > 0 else 0,
+                                    'line_content': line_content
+                                }
+                    except Exception as e:
+                        lines['error'] = str(e)
+                        
+                    function_stats = {
+                        'filename': filename,
+                        'line_number': line_number,
+                        'function_name': function_name,
+                        'total_time': total_time,
+                        'lines': lines
+                    }
+                    
+                    stats['functions'].append(function_stats)
+            
+            # If we can't handle the results structure, create a simple stub result
+            else:
+                stats['functions'].append({
+                    'filename': 'unknown',
+                    'line_number': 0,
+                    'function_name': 'unknown',
+                    'total_time': 0,
+                    'lines': {'error': 'Unsupported line_profiler results format'}
+                })
+        
+        except Exception as e:
+            # If anything goes wrong, add error information
+            stats['error'] = str(e)
+            stats['functions'].append({
+                'filename': 'unknown',
+                'line_number': 0,
+                'function_name': 'unknown',
+                'total_time': 0,
+                'lines': {'error': f'Error processing results: {str(e)}'}
+            })
             
         return stats
         
