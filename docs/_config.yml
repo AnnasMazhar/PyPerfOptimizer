@@ -1,0 +1,7 @@
+theme: jekyll-theme-minimal
+title: PyPerfOptimizer
+description: A comprehensive Python package for unified performance profiling, visualization, and optimization
+show_downloads: true
+google_analytics:
+github:
+  repository_url: https://github.com/yourusername/pyperfoptimizer
