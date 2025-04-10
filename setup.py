@@ -1,4 +1,9 @@
 from setuptools import setup, find_packages
+import os
+
+# Read the long description from README.md
+with open("README.md", "r", encoding="utf-8") as fh:
+    long_description = fh.read()
 
 # Read the long description from README.md
 with open("README.md", "r", encoding="utf-8") as fh:
@@ -7,6 +12,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 setup(
     name="pyperfoptimizer",
     version="0.1.0",
+<<<<<<< HEAD
     author="Syed Annas",
     author_email="ammas.mazhar10@gmail.com",
     description="A comprehensive Python package for unified performance profiling, visualization, and optimization",
@@ -15,6 +21,16 @@ setup(
     url="https://github.com/AnnasMazhar/PyPerfOptimizer",
     project_urls={
         "Bug Tracker": "https://github.com/AnnasMazhar/PyPerfOptimizer/issues",
+=======
+    author="Your Name",
+    author_email="your.email@example.com",
+    description="A comprehensive Python package for unified performance profiling, visualization, and optimization",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
+    url="https://github.com/yourusername/pyperfoptimizer",
+    project_urls={
+        "Bug Tracker": "https://github.com/yourusername/pyperfoptimizer/issues",
+>>>>>>> 9db7e9a (Add pip installable Python package for performance profiling.)
     },
     classifiers=[
         "Programming Language :: Python :: 3",

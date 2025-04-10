@@ -2,8 +2,11 @@
 
 [![PyPI version](https://badge.fury.io/py/pyperfoptimizer.svg)](https://badge.fury.io/py/pyperfoptimizer)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+<<<<<<< HEAD
 [![Python Versions](https://img.shields.io/pypi/pyversions/pyperfoptimizer.svg)](https://pypi.org/project/pyperfoptimizer/)
 [![Documentation Status](https://readthedocs.io/en/latest/?badge=latest)](https://pyperfoptimizer.readthedocs.io/)
+=======
+>>>>>>> 9db7e9a (Add pip installable Python package for performance profiling.)
 
 A comprehensive Python package for unified performance profiling, visualization, and optimization.
 
@@ -16,6 +19,7 @@ A comprehensive Python package for unified performance profiling, visualization,
 - **Decorator & Context Manager Support**: Simple API with multiple usage patterns
 - **Export & Sharing**: Export results to various formats for sharing and documentation
 
+<<<<<<< HEAD
 ## 📈 Performance Improvements
 
 PyPerfOptimizer enables significant performance improvements across a wide range of applications:
@@ -36,6 +40,8 @@ Real-world applications show dramatic performance gains:
 
 For comprehensive benchmarks and case studies, see our [test results documentation](docs/test_results/).
 
+=======
+>>>>>>> 9db7e9a (Add pip installable Python package for performance profiling.)
 ## Installation
 
 ```bash
@@ -128,6 +134,7 @@ with line_profiler(func_to_profile=my_function) as profiler:
     my_function()
 ```
 
+<<<<<<< HEAD
 ## Automated Optimization
 
 ```python
@@ -147,6 +154,8 @@ optimized_func = optimize_function(
 )
 ```
 
+=======
+>>>>>>> 9db7e9a (Add pip installable Python package for performance profiling.)
 ## Examples
 
 See the `examples/` directory for comprehensive examples:
@@ -156,6 +165,7 @@ See the `examples/` directory for comprehensive examples:
 - Integrated dashboard: `examples/integrated_dashboard.py`
 - Automation workflows: `examples/automation_example.py`
 
+<<<<<<< HEAD
 ## Detailed Documentation
 
 ### User Guides
@@ -186,3 +196,12 @@ Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+=======
+## Documentation
+
+For detailed documentation, visit our [documentation site](https://github.com/yourusername/pyperfoptimizer).
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+>>>>>>> 9db7e9a (Add pip installable Python package for performance profiling.)

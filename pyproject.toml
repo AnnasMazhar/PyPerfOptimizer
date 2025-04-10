@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9db7e9a (Add pip installable Python package for performance profiling.)
 [build-system]
 requires = ["setuptools>=42", "wheel"]
 build-backend = "setuptools.build_meta"
@@ -14,6 +17,7 @@ multi_line_output = 3
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+<<<<<<< HEAD
 python_files = "test_*.py"
 =======
 [project]
@@ -35,3 +39,6 @@ dependencies = [
     "setuptools>=78.1.0",
 ]
 >>>>>>> 06a5ef2 (Add CI/CD pipeline and example scripts for PyPerfOptimizer.  This includes automation, dashboard integration, and memory optimization examples.)
+=======
+python_files = "test_*.py"
+>>>>>>> 9db7e9a (Add pip installable Python package for performance profiling.)
