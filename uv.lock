@@ -3,6 +3,9 @@ requires-python = ">=3.11"
 
 [[package]]
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> a2b645b (Add astor and setuptools packages to the project dependencies.)
 name = "astor"
 version = "0.8.1"
 source = { registry = "https://pypi.org/simple" }
@@ -12,8 +15,11 @@ wheels = [
 ]
 
 [[package]]
+<<<<<<< HEAD
 =======
 >>>>>>> 06a5ef2 (Add CI/CD pipeline and example scripts for PyPerfOptimizer.  This includes automation, dashboard integration, and memory optimization examples.)
+=======
+>>>>>>> a2b645b (Add astor and setuptools packages to the project dependencies.)
 name = "blinker"
 version = "1.9.0"
 source = { registry = "https://pypi.org/simple" }
@@ -684,9 +690,13 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
 <<<<<<< HEAD
+<<<<<<< HEAD
     { name = "astor" },
 =======
 >>>>>>> 06a5ef2 (Add CI/CD pipeline and example scripts for PyPerfOptimizer.  This includes automation, dashboard integration, and memory optimization examples.)
+=======
+    { name = "astor" },
+>>>>>>> a2b645b (Add astor and setuptools packages to the project dependencies.)
     { name = "email-validator" },
     { name = "flask" },
     { name = "flask-sqlalchemy" },
@@ -697,17 +707,25 @@ dependencies = [
     { name = "plotly" },
     { name = "psycopg2-binary" },
 <<<<<<< HEAD
+<<<<<<< HEAD
     { name = "setuptools" },
 =======
 >>>>>>> 06a5ef2 (Add CI/CD pipeline and example scripts for PyPerfOptimizer.  This includes automation, dashboard integration, and memory optimization examples.)
+=======
+    { name = "setuptools" },
+>>>>>>> a2b645b (Add astor and setuptools packages to the project dependencies.)
 ]
 
 [package.metadata]
 requires-dist = [
 <<<<<<< HEAD
+<<<<<<< HEAD
     { name = "astor", specifier = ">=0.8.1" },
 =======
 >>>>>>> 06a5ef2 (Add CI/CD pipeline and example scripts for PyPerfOptimizer.  This includes automation, dashboard integration, and memory optimization examples.)
+=======
+    { name = "astor", specifier = ">=0.8.1" },
+>>>>>>> a2b645b (Add astor and setuptools packages to the project dependencies.)
     { name = "email-validator", specifier = ">=2.2.0" },
     { name = "flask", specifier = ">=3.1.0" },
     { name = "flask-sqlalchemy", specifier = ">=3.1.1" },
@@ -718,6 +736,9 @@ requires-dist = [
     { name = "plotly", specifier = ">=6.0.1" },
     { name = "psycopg2-binary", specifier = ">=2.9.10" },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> a2b645b (Add astor and setuptools packages to the project dependencies.)
     { name = "setuptools", specifier = ">=78.1.0" },
 ]
 
@@ -728,8 +749,11 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/a9/5a/0db4da3bc908df06e5efae42b44e75c81dd52716e10192ff36d0c1c8e379/setuptools-78.1.0.tar.gz", hash = "sha256:18fd474d4a82a5f83dac888df697af65afa82dec7323d09c3e37d1f14288da54", size = 1367827 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/54/21/f43f0a1fa8b06b32812e0975981f4677d28e0f3271601dc88ac5a5b83220/setuptools-78.1.0-py3-none-any.whl", hash = "sha256:3e386e96793c8702ae83d17b853fb93d3e09ef82ec62722e61da5cd22376dcd8", size = 1256108 },
+<<<<<<< HEAD
 =======
 >>>>>>> 06a5ef2 (Add CI/CD pipeline and example scripts for PyPerfOptimizer.  This includes automation, dashboard integration, and memory optimization examples.)
+=======
+>>>>>>> a2b645b (Add astor and setuptools packages to the project dependencies.)
 ]
 
 [[package]]

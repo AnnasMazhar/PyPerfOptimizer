@@ -22,6 +22,7 @@ version = "0.1.0"
 description = "Add your description here"
 requires-python = ">=3.11"
 dependencies = [
+    "astor>=0.8.1",
     "email-validator>=2.2.0",
     "flask>=3.1.0",
     "flask-sqlalchemy>=3.1.1",
@@ -31,5 +32,6 @@ dependencies = [
     "memory-profiler>=0.61.0",
     "plotly>=6.0.1",
     "psycopg2-binary>=2.9.10",
+    "setuptools>=78.1.0",
 ]
 >>>>>>> 06a5ef2 (Add CI/CD pipeline and example scripts for PyPerfOptimizer.  This includes automation, dashboard integration, and memory optimization examples.)
