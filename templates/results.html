@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">PyPerfOptimizer</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if example == 'simple' %}active{% endif %}" href="/run/simple">Simple Profiling</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if example == 'memory' %}active{% endif %}" href="/run/memory">Memory Optimization</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if example == 'integrated' %}active{% endif %}" href="/run/integrated">Integrated Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if example == 'automation' %}active{% endif %}" href="/run/automation">Automation Example</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h2>{{ title }}</h2>
+                        <p class="mb-0">Results generated at: {{ timestamp }}</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-info">
+                            This page would normally display actual profiling results from running the example.
+                            For this demo, we're showing a placeholder instead.
+                        </div>
+                        
+                        {% if example == 'simple' %}
+                            <h3>CPU Profiling Results</h3>
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <pre class="bg-dark text-light p-3">===== CPU Profiling Demonstration =====
+
+--- Method 1: Using the CPUProfiler class directly ---
+Function                                     Calls     Total Time    Per Call      % Time  
+------------------------------------------------------------------------------------------
+slow_recursive_function                       21891      2.34567s     0.00011s      50.12%
+_calculate_fibonacci_value                    21891      1.23456s     0.00006s      24.89%
+calculate_average                              1000      0.56789s     0.00057s      12.36%
+format_results                                  500      0.34567s     0.00069s       7.45%
+display_results                                 100      0.23456s     0.00235s       5.18%
+                                  </pre>
+                                </div>
+                            </div>
+
+                            <h3>Memory Profiling Results</h3>
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <pre class="bg-dark text-light p-3">===== Memory Profiling Demonstration =====
+
+--- Memory Profile Summary ---
+Baseline Memory:     125.4 MB
+Peak Memory:         178.9 MB
+Memory Increase:     53.5 MB
+Avg Memory:          156.7 MB
+Total Duration:      2.45 seconds
+Memory Growth Rate:  21.8 MB/s
+                                    </pre>
+                                </div>
+                            </div>
+
+                        {% elif example == 'memory' %}
+                            <h3>Memory Leak Analysis</h3>
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <pre class="bg-dark text-light p-3">===== Memory Leak Demonstration =====
+
+--- Memory Leak Analysis ---
+Memory leak detected in class: LeakyClass
+Leak source: Class variable '_history' continuously growing
+Initial memory: 120.3 MB
+Final memory:   185.7 MB
+Leaked memory:  65.4 MB
+
+Memory Optimization Recommendations:
+- Convert class variable to instance variable
+- Add a size limit for history collection
+- Clear history periodically
+- Use weak references for history items
+                                    </pre>
+                                </div>
+                            </div>
+
+                        {% elif example == 'integrated' %}
+                            <h3>Integrated Dashboard Overview</h3>
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <pre class="bg-dark text-light p-3">===== Integrated Dashboard Overview =====
+
+Dashboard URL: http://localhost:5000
+Dashboard HTML: saved to pyperfoptimizer_dashboard.html
+
+Components Included:
+- CPU Profiling Charts
+- Memory Usage Timeline
+- Function Call Timeline
+- Performance Hotspots
+- Optimization Recommendations
+
+Top CPU Consumers:
+1. fibonacci (22.4s, 68.3%)
+2. memory_intensive_task (8.7s, 26.5%)
+3. process_data (1.7s, 5.2%)
+                                    </pre>
+                                </div>
+                            </div>
+
+                        {% elif example == 'automation' %}
+                            <h3>Performance Comparison</h3>
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <pre class="bg-dark text-light p-3">===== Performance Comparison =====
+
+Comparing slow_function vs optimized_function
+
+Original CPU Time:  1.234567 seconds
+Optimized CPU Time: 0.123456 seconds
+CPU Time Improvement: 90.00%
+
+Original Peak Memory: 155.45 MB
+Optimized Peak Memory: 132.56 MB
+Memory Usage Improvement: 14.73%
+
+Optimization Techniques Applied:
+- Replaced list concatenation with append
+- Replaced string concatenation with join
+- Eliminated redundant operations
+- Improved algorithm efficiency
+                                    </pre>
+                                </div>
+                            </div>
+                        {% endif %}
+                        
+                        <a href="/" class="btn btn-primary">Back to Dashboard</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
