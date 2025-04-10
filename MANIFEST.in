@@ -1,0 +1,6 @@
+include LICENSE
+include README.md
+recursive-include examples *.py
+recursive-include templates *.html
+recursive-include src/pyperfoptimizer/templates *.html
+recursive-include src/pyperfoptimizer/static *.js *.css
