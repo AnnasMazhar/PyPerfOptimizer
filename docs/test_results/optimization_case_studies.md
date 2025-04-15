@@ -77,9 +77,6 @@ Based on PyPerfOptimizer's recommendations, the team made the following changes:
 | Page Abandonment Rate | 27% | 3.5% | 87.0% |
 | Server Capacity | 120 req/second | 1450 req/second | 1108.3% |
 
-The project lead commented:
-
-> "PyPerfOptimizer's comprehensive approach was key to our success. The CPU profiler showed which functions were problematic, but it was the line-level profiling that pinpointed exactly which operations were inefficient. The memory profiler helped us identify data structures that were unnecessarily large. Having these three perspectives in a unified interface made the optimization process much more effective."
 
 ## Case Study 2: Financial Data Analysis Pipeline
 
@@ -151,9 +148,6 @@ Line Profiling Hotspots:
 | Database Query Count | 423,000 | 1,450 | 99.7% |
 | CPU Utilization | 27% (inefficient) | 89% (efficient) | 229.6% |
 
-The VP of Data Engineering commented:
-
-> "The insights from PyPerfOptimizer changed our approach to performance optimization. Previously, we were making educated guesses about bottlenecks. With the multi-faceted profiling, we could see exactly where time was being spent, how memory was being used, and which specific lines of code needed attention. This enabled us to make targeted, high-impact changes rather than broad optimizations that might not address the root causes."
 
 ## Case Study 3: Machine Learning Training Pipeline
 
@@ -226,9 +220,7 @@ Line Profiling Hotspots:
 | GPU Utilization | 43% | 91% | 111.6% |
 | Experiments Per Week | 5-6 | 40-50 | ~800% |
 
-The ML Engineering Lead commented:
 
-> "PyPerfOptimizer gave us visibility into aspects of our pipeline we couldn't see before. The ability to profile both CPU and GPU operations, along with memory usage and line-by-line execution times, helped us identify bottlenecks we wouldn't have found otherwise. The most valuable insight was seeing how our data pipeline was actually the main bottleneck, not the model training itself. After optimization, we can now run 8x more experiments in the same time period, which has dramatically accelerated our research progress."
 
 ## Case Study 4: Web Application API Performance
 
@@ -310,9 +302,7 @@ Concurrency Analysis:
 | Database Query Count | 95M/day | 8.2M/day | 91.4% |
 | Server Cost | $12,500/month | $3,200/month | 74.4% |
 
-The CTO commented:
 
-> "PyPerfOptimizer helped us avoid a complete rewrite of our API layer. We had been considering moving from Python to a 'faster' language, but the profiling showed that our issues were primarily due to inefficient database access patterns and architecture decisions, not the language itself. By following the optimization recommendations, we achieved a 93% reduction in response times and 74% reduction in server costs while still using Python. The comprehensive profiling across CPU, memory, and database operations was instrumental in identifying the real bottlenecks."
 
 ## Case Study 5: Data Science Notebook Optimization
 
@@ -388,10 +378,6 @@ I/O Profiling Results:
 | Peak Memory Usage | 58.7 GB | 6.4 GB | 89.1% |
 | Data Loading Time | 42 minutes | 3.2 minutes | 92.4% |
 | Visualization Time | 3.7 hours | 8 minutes | 96.4% |
-
-A lead data scientist commented:
-
-> "PyPerfOptimizer transformed our research workflow. We went from running analyses overnight to getting results in minutes. The most valuable aspect was the cell-by-cell profiling, which showed us exactly which parts of our notebooks needed optimization. The line-level profiling then helped us target specific operations. It surprised us to learn that our visualization code was actually the biggest bottleneck, not the model training as we had assumed. These insights allowed us to prioritize our optimization efforts for maximum impact."
 
 ## Summary of Optimization Patterns
 
