@@ -5,8 +5,7 @@
 
 [![Python Versions](https://img.shields.io/pypi/pyversions/pyperfoptimizer.svg)](https://pypi.org/project/pyperfoptimizer/)
 [![Documentation Status](https://readthedocs.io/en/latest/?badge=latest)](https://pyperfoptimizer.readthedocs.io/)
-=======
-=======
+
 [![Python Versions](https://img.shields.io/pypi/pyversions/pyperfoptimizer.svg)](https://pypi.org/project/pyperfoptimizer/)
 [![Documentation Status](https://readthedocs.io/en/latest/?badge=latest)](https://pyperfoptimizer.readthedocs.io/)
 
@@ -20,7 +19,7 @@ A comprehensive Python package for unified performance profiling, visualization,
 - **Web Dashboard**: Browser-based dashboard for profile data exploration and visualization
 - **Decorator & Context Manager Support**: Simple API with multiple usage patterns
 - **Export & Sharing**: Export results to various formats for sharing and documentation
-=======
+
 ## 📈 Performance Improvements
 
 PyPerfOptimizer enables significant performance improvements across a wide range of applications:
@@ -41,8 +40,7 @@ Real-world applications show dramatic performance gains:
 
 For comprehensive benchmarks and case studies, see our [test results documentation](docs/test_results/).
 
-=======
-=======
+
 ## Installation
 
 ```bash
@@ -163,8 +161,7 @@ See the `examples/` directory for comprehensive examples:
 - Integrated dashboard: `examples/integrated_dashboard.py`
 - Automation workflows: `examples/automation_example.py`
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 ## Detailed Documentation
 
 ### User Guides
