@@ -57,11 +57,14 @@ def fix(source: str, patterns: list[Pattern] | None = None, hot_functions: list[
     """Apply all safe optimizations and return transformed source.
 
     If hot_functions is provided, only fixes optimizations in hot paths.
+    Skips patterns with auto_fix=False.
     """
     patterns = patterns or ALL_PATTERNS
     tree = cst.parse_module(source)
 
     for pattern in patterns:
+        if not getattr(pattern, "auto_fix", True):
+            continue
         matches = pattern.detect(tree)
         for match in matches:
             if not _in_hot_path(match.line, hot_functions):

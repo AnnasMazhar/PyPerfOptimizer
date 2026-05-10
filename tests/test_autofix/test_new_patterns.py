@@ -31,10 +31,11 @@ class TestLoopToAnyAll(unittest.TestCase):
         opts = scan(code)
         self.assertTrue(any(o.pattern_name == 'loop_to_any_all' for o in opts))
 
-    def test_transform(self):
+    def test_no_auto_fix(self):
+        """loop_to_any_all is detection-only (auto_fix=False) — fix() should not transform."""
         code = 'for x in items:\n    if x > 0:\n        return True\n'
         result = fix(code)
-        self.assertIn('any(', result)
+        self.assertNotIn('any(', result)
 
 
 class TestDictGet(unittest.TestCase):
