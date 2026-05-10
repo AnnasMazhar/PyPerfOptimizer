@@ -1,63 +1,36 @@
 # Contributing to PyPerfOptimizer
 
-Thank you for considering contributing to PyPerfOptimizer! This document provides guidelines and instructions for contributing to this project.
-
 ## Development Setup
 
-1. Fork the repository on GitHub.
-2. Clone your fork locally:
-   ```bash
-   git clone https://github.com/yourusername/pyperfoptimizer.git
-   cd pyperfoptimizer
-   ```
-
-3. Install development dependencies:
-   ```bash
-   pip install -e ".[dev]"
-   ```
-
-4. Create a branch for your changes:
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
-
-## Code Standards
-
-- Follow PEP 8 style guidelines
-- Write docstrings for all functions, classes, and methods
-- Add appropriate type hints
-- Ensure all tests pass before submitting a pull request
+```bash
+git clone https://github.com/AnnasMazhar/PyPerfOptimizer.git
+cd PyPerfOptimizer
+pip install -e .
+pip install pytest ruff libcst
+```
 
 ## Running Tests
 
 ```bash
-pytest
+python -m pytest tests/ -v    # 135 tests
+ruff check src/ tests/        # lint
 ```
+
+## Adding a New Pattern
+
+1. Create `src/pyperfoptimizer/autofix/patterns/your_pattern.py`
+2. Implement `detect()` and optionally `transform()` using libcst
+3. Register in `src/pyperfoptimizer/autofix/patterns/__init__.py`
+4. Add tests in `tests/test_autofix/`
+5. Verify: `python -m pytest tests/ -v`
 
 ## Submitting Changes
 
-1. Push your changes to your fork on GitHub.
-2. Submit a pull request to the main repository.
-3. Ensure the description clearly describes the problem and solution.
+1. Fork and create a branch
+2. Make your changes
+3. Run tests and lint
+4. Submit a pull request with clear description
 
-## Reporting Bugs
+## Reporting Issues
 
-When reporting bugs, please include:
-
-- Your operating system name and version
-- Python version
-- Detailed steps to reproduce the bug
-- What you expected to happen
-- What actually happened
-
-## Feature Requests
-
-Feature requests are welcome. Please provide:
-
-- A clear description of the feature
-- Why it would be beneficial
-- Any ideas for implementation
-
-## Code of Conduct
-
-Please be respectful and considerate of others when contributing to this project. We are committed to providing a welcoming and inspiring community for all.
+Include: Python version, OS, steps to reproduce, expected vs actual behavior.
