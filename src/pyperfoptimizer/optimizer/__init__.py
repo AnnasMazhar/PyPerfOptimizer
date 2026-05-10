@@ -6,7 +6,7 @@ based on profiling results.
 """
 
 from pyperfoptimizer.optimizer.code_analyzer import CodeAnalyzer
-from pyperfoptimizer.optimizer.recommendations import Recommendations
 from pyperfoptimizer.optimizer.optimizations import Optimizations
+from pyperfoptimizer.optimizer.recommendations import Recommendations
 
 __all__ = ['CodeAnalyzer', 'Recommendations', 'Optimizations']

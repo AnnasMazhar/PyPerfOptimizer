@@ -161,7 +161,7 @@ def _extract_filter_condition(test, row_name: str, df_name: str) -> str | None:
         if left_col:
             comp = test.comparisons[0]
             # Get the comparator as code
-            right_code = cst.parse_module("").code_for_node(comp.comparator) if hasattr(comp, 'comparator') else None
+            cst.parse_module("").code_for_node(comp.comparator) if hasattr(comp, 'comparator') else None
             # Build df['col'] <op> <value>
             op_map = {
                 cst.GreaterThan: ">", cst.LessThan: "<",

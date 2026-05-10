@@ -6,6 +6,7 @@ import unittest
 
 from pyperfoptimizer.optimizer.recommendations import Recommendations
 
+
 class TestRecommendations(unittest.TestCase):
     """Test cases for the Recommendations class."""
 
@@ -102,7 +103,6 @@ class TestRecommendations(unittest.TestCase):
                            for rec in recommendations))
                            
         # Check for memory growth recommendation
-        growth_rate = 450.0 / 2.0  # 225 MB/s
         self.assertTrue(any('growth rate' in rec.lower() for rec in recommendations))
         
     def test_generate_from_line_profile(self):

@@ -5,16 +5,14 @@ This module provides a web-based dashboard for interactive exploration
 of profiling results from CPU, memory, and line profilers.
 """
 
-import os
 import json
-import tempfile
+import os
 import webbrowser
-from typing import Dict, List, Optional, Any, Union, Tuple
-import datetime
+from typing import Dict, List
 
 # Try to import Flask for the web dashboard
 try:
-    from flask import Flask, render_template_string, request, jsonify
+    from flask import Flask, jsonify, render_template_string, request
     _HAS_FLASK = True
 except ImportError:
     _HAS_FLASK = False
@@ -99,7 +97,6 @@ class Dashboard:
         """
         # Determine CSS theme
         bootstrap_css = "https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css"
-        charts_theme = "dark" if self.theme == "dark" else "light"
         
         # Create the HTML template
         return '''

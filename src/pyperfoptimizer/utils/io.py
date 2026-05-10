@@ -4,11 +4,12 @@ I/O utilities for PyPerfOptimizer.
 This module provides utilities for saving and loading profiling results.
 """
 
-import os
 import json
+import os
 import pickle
 from datetime import datetime
-from typing import Dict, List, Optional, Any, Union, BinaryIO, TextIO
+from typing import Dict, List, Optional
+
 
 def save_profile(
     profile_data: Dict,

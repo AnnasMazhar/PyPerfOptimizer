@@ -2,12 +2,13 @@
 Tests for the CPU profiler component of PyPerfOptimizer.
 """
 
-import unittest
-import time
 import os
 import tempfile
+import time
+import unittest
 
 from pyperfoptimizer.profiler.cpu_profiler import CPUProfiler
+
 
 class TestCPUProfiler(unittest.TestCase):
     """Test cases for the CPUProfiler class."""

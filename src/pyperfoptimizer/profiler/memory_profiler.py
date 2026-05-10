@@ -5,16 +5,15 @@ This module integrates with the memory_profiler package to track memory usage
 of Python functions and code blocks.
 """
 
-import os
-import sys
-import time
-import tempfile
-import functools
-import traceback
 import importlib.util
-import psutil
-from typing import Callable, Dict, List, Optional, Any, Union, TextIO
+import os
+import tempfile
+import time
+import traceback
 from datetime import datetime
+from typing import Any, Callable, Dict, Optional, TextIO
+
+import psutil
 
 # Check if memory_profiler is installed
 try:

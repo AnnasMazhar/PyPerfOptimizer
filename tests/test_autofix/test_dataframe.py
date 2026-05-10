@@ -1,12 +1,11 @@
 """Tests for DataFrame vectorization pattern."""
 
-import sys
-from unittest.mock import MagicMock
 
 import libcst as cst
-import pytest
 
-from pyperfoptimizer.autofix.patterns.dataframe_vectorize import DataFrameVectorizePattern
+from pyperfoptimizer.autofix.patterns.dataframe_vectorize import (
+    DataFrameVectorizePattern,
+)
 
 
 class TestIterrowsArithmetic:

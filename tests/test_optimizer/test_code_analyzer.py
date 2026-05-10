@@ -2,12 +2,13 @@
 Tests for the code analyzer component of PyPerfOptimizer.
 """
 
-import unittest
+import ast
 import os
 import tempfile
-import ast
+import unittest
 
 from pyperfoptimizer.optimizer.code_analyzer import CodeAnalyzer, CodeVisitor
+
 
 class TestCodeAnalyzer(unittest.TestCase):
     """Test cases for the CodeAnalyzer class."""

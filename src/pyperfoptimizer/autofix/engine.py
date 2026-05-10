@@ -8,7 +8,7 @@ from typing import TYPE_CHECKING
 import libcst as cst
 
 from .patterns import ALL_PATTERNS
-from .patterns.base import Match, Optimization, Pattern
+from .patterns.base import Optimization, Pattern
 
 if TYPE_CHECKING:
     from .profile_loader import HotFunction

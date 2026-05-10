@@ -2,12 +2,10 @@
 Tests for the line profiler component of PyPerfOptimizer.
 """
 
-import unittest
-import time
 import os
-import tempfile
-import pickle
 import sys
+import tempfile
+import unittest
 
 try:
     import line_profiler
@@ -16,6 +14,7 @@ except ImportError:
     _HAS_LINE_PROFILER = False
 
 from pyperfoptimizer.profiler.line_profiler import LineProfiler
+
 
 @unittest.skipUnless(_HAS_LINE_PROFILER, "line_profiler not installed")
 class TestLineProfiler(unittest.TestCase):

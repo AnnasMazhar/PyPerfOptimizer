@@ -6,8 +6,7 @@ using various chart types and formats.
 """
 
 import os
-import json
-from typing import Dict, List, Optional, Any, Union, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 # Try to import visualization libraries
 try:
@@ -18,8 +17,8 @@ except ImportError:
     _HAS_MPL = False
 
 try:
-    import plotly.graph_objects as go
     import plotly.express as px
+    import plotly.graph_objects as go
     _HAS_PLOTLY = True
 except ImportError:
     _HAS_PLOTLY = False

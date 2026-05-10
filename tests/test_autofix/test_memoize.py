@@ -1,7 +1,6 @@
 """Tests for auto_memoize pattern."""
 
 import libcst as cst
-import pytest
 
 from pyperfoptimizer.autofix.patterns.auto_memoize import AutoMemoizePattern
 

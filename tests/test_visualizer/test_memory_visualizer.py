@@ -2,10 +2,9 @@
 Tests for the memory visualizer component of PyPerfOptimizer.
 """
 
-import unittest
 import os
 import tempfile
-import time
+import unittest
 
 try:
     import matplotlib
@@ -34,6 +33,7 @@ except ImportError:
     _HAS_MEMORY_PROFILER = False
 
 from pyperfoptimizer.visualizer.memory_visualizer import MemoryVisualizer
+
 
 def generate_sample_memory_data():
     """Generate sample memory profile data for testing."""

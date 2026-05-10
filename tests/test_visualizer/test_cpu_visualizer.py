@@ -2,10 +2,10 @@
 Tests for the CPU visualizer component of PyPerfOptimizer.
 """
 
-import unittest
 import os
 import tempfile
 import time
+import unittest
 
 try:
     import matplotlib
@@ -27,8 +27,9 @@ try:
 except ImportError:
     _HAS_KALEIDO = False
 
-from pyperfoptimizer.visualizer.cpu_visualizer import CPUVisualizer
 from pyperfoptimizer.profiler.cpu_profiler import CPUProfiler
+from pyperfoptimizer.visualizer.cpu_visualizer import CPUVisualizer
+
 
 def generate_sample_profile_data():
     """Generate sample CPU profile data for testing."""

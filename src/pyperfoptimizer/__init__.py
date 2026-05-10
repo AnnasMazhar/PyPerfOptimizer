@@ -13,31 +13,24 @@ This package provides tools for:
 __version__ = "0.2.0"
 
 # Import key components for convenient access
+from pyperfoptimizer.optimizer import CodeAnalyzer, Recommendations
 from pyperfoptimizer.profiler import (
-    CPUProfiler, 
-    MemoryProfiler, 
-    LineProfiler, 
-    ProfileManager
-)
-from pyperfoptimizer.utils.decorators import (
-    profile_cpu, 
-    profile_memory, 
-    profile_line
+    CPUProfiler,
+    LineProfiler,
+    MemoryProfiler,
+    ProfileManager,
 )
 from pyperfoptimizer.utils.context_managers import (
     cpu_profiler,
+    line_profiler,
     memory_profiler,
-    line_profiler
 )
+from pyperfoptimizer.utils.decorators import profile_cpu, profile_line, profile_memory
 from pyperfoptimizer.visualizer import (
     CPUVisualizer,
+    Dashboard,
     MemoryVisualizer,
     TimelineVisualizer,
-    Dashboard
-)
-from pyperfoptimizer.optimizer import (
-    CodeAnalyzer,
-    Recommendations
 )
 
 # Define what's exposed via `from pyperfoptimizer import *`

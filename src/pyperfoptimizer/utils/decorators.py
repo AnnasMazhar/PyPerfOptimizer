@@ -5,16 +5,15 @@ This module provides decorators for easy profiling of functions.
 """
 
 import functools
-import time
 import os
-from typing import Callable, Dict, List, Optional, Any, Union, TextIO
-import inspect
+from typing import Callable, Optional, TextIO
 
 # Import profilers
 from pyperfoptimizer.profiler.cpu_profiler import CPUProfiler
-from pyperfoptimizer.profiler.memory_profiler import MemoryProfiler
 from pyperfoptimizer.profiler.line_profiler import LineProfiler
+from pyperfoptimizer.profiler.memory_profiler import MemoryProfiler
 from pyperfoptimizer.profiler.profile_manager import ProfileManager
+
 
 def profile_cpu(
     sort_by: str = 'cumulative',
@@ -220,7 +219,7 @@ def profile_all(
                     filenames = profile_manager.save_stats(save_dir, prefix_value)
                     
                     if print_stats:
-                        print(f"\nProfiling statistics saved to:", file=output)
+                        print("\nProfiling statistics saved to:", file=output)
                         for name, filename in filenames.items():
                             print(f"  {name}: {filename}", file=output)
                 

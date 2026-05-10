@@ -6,13 +6,13 @@ an easy-to-use interface for CPU profiling Python code.
 """
 
 import cProfile
-import pstats
 import io
-import time
-import functools
 import os
-from typing import Callable, Dict, List, Optional, Any, Union, TextIO
+import pstats
+import time
 from datetime import datetime
+from typing import Any, Callable, Dict, List, Optional, TextIO
+
 
 class CPUProfiler:
     """

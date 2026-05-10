@@ -6,8 +6,7 @@ using various chart types and formats.
 """
 
 import os
-import json
-from typing import Dict, List, Optional, Any, Union, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 # Try to import visualization libraries
 try:
@@ -18,8 +17,8 @@ except ImportError:
     _HAS_MPL = False
 
 try:
-    import plotly.graph_objects as go
     import plotly.express as px
+    import plotly.graph_objects as go
     _HAS_PLOTLY = True
 except ImportError:
     _HAS_PLOTLY = False
@@ -147,7 +146,7 @@ class CPUVisualizer:
         
         # Create a horizontal bar chart
         y_pos = range(len(func_names))
-        bars = ax.barh(y_pos, func_times, align='center')
+        ax.barh(y_pos, func_times, align='center')
         
         # Add labels and format the plot
         ax.set_yticks(y_pos)
@@ -282,7 +281,7 @@ class CPUVisualizer:
         
         # Create a horizontal bar chart
         y_pos = range(len(func_names))
-        bars = ax.barh(y_pos, call_counts, align='center')
+        ax.barh(y_pos, call_counts, align='center')
         
         # Add labels and format the plot
         ax.set_yticks(y_pos)
@@ -412,7 +411,7 @@ class CPUVisualizer:
         
         # Create a horizontal bar chart
         y_pos = range(len(func_names))
-        bars = ax.barh(y_pos, times_per_call, align='center')
+        ax.barh(y_pos, times_per_call, align='center')
         
         # Add labels and format the plot
         ax.set_yticks(y_pos)

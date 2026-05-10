@@ -5,10 +5,9 @@ This module provides tools for generating optimization recommendations
 based on profiling results and code analysis.
 """
 
-import ast
 import re
-from typing import Dict, List, Set, Tuple, Optional, Any, Union, Callable
-import inspect
+from typing import Dict, List, Optional
+
 
 class Recommendations:
     """
@@ -287,7 +286,7 @@ class Recommendations:
         
         # Add issues as recommendations
         for issue in issues:
-            severity = issue.get('severity', 'info')
+            issue.get('severity', 'info')
             message = issue.get('message', '')
             line = issue.get('line', '')
             

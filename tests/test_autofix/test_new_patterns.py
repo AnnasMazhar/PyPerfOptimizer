@@ -5,10 +5,16 @@ import unittest
 import libcst as cst
 
 from pyperfoptimizer.autofix import fix, scan
+from pyperfoptimizer.autofix.patterns.defaultdict_opportunity import (
+    DefaultdictOpportunityPattern,
+)
+from pyperfoptimizer.autofix.patterns.exception_control_flow import (
+    ExceptionControlFlowPattern,
+)
 from pyperfoptimizer.autofix.patterns.regex_precompile import RegexPrecompilePattern
-from pyperfoptimizer.autofix.patterns.defaultdict_opportunity import DefaultdictOpportunityPattern
-from pyperfoptimizer.autofix.patterns.repeated_attr_in_loop import RepeatedAttrInLoopPattern
-from pyperfoptimizer.autofix.patterns.exception_control_flow import ExceptionControlFlowPattern
+from pyperfoptimizer.autofix.patterns.repeated_attr_in_loop import (
+    RepeatedAttrInLoopPattern,
+)
 
 
 class TestRegexPrecompile(unittest.TestCase):

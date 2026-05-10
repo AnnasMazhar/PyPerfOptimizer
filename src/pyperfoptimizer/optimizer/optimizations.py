@@ -6,11 +6,12 @@ based on profiling results and common performance patterns.
 """
 
 import ast
-import re
-import astor
-from typing import Dict, List, Set, Tuple, Optional, Any, Union, Callable
 import inspect
-import sys
+import re
+from typing import Callable, Dict, List, Optional
+
+import astor
+
 
 class Optimizations:
     """

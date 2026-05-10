@@ -1,7 +1,7 @@
 """Benchmark verification for optimizations."""
 
-import time
 import textwrap
+import time
 from dataclasses import dataclass
 
 

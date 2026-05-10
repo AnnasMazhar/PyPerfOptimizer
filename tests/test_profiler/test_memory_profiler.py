@@ -2,12 +2,12 @@
 Tests for the memory profiler component of PyPerfOptimizer.
 """
 
-import unittest
-import time
-import os
-import tempfile
 import json
+import os
 import sys
+import tempfile
+import time
+import unittest
 
 try:
     import memory_profiler
@@ -16,6 +16,7 @@ except ImportError:
     _HAS_MEMORY_PROFILER = False
 
 from pyperfoptimizer.profiler.memory_profiler import MemoryProfiler
+
 
 @unittest.skipUnless(_HAS_MEMORY_PROFILER, "memory_profiler not installed")
 class TestMemoryProfiler(unittest.TestCase):

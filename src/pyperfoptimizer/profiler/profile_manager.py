@@ -5,15 +5,16 @@ This module provides a unified interface to manage different types of profilers
 (CPU, memory, line) and their results.
 """
 
-import os
 import json
+import os
 import time
-from typing import Callable, Dict, List, Optional, Any, Union, TextIO
 from datetime import datetime
+from typing import Any, Callable, Dict, List, Optional, TextIO
 
 from pyperfoptimizer.profiler.cpu_profiler import CPUProfiler
-from pyperfoptimizer.profiler.memory_profiler import MemoryProfiler
 from pyperfoptimizer.profiler.line_profiler import LineProfiler
+from pyperfoptimizer.profiler.memory_profiler import MemoryProfiler
+
 
 class ProfileManager:
     """

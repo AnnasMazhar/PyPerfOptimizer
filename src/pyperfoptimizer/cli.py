@@ -3,17 +3,17 @@
 Command-line interface for PyPerfOptimizer.
 """
 
-import os
-import sys
 import argparse
 import importlib.util
 import inspect
-from typing import List, Optional, Dict, Any, Union, Callable
+import os
+import sys
+from typing import Any, Callable, Dict, List, Optional
 
+from pyperfoptimizer.optimizer import CodeAnalyzer, Recommendations
 from pyperfoptimizer.profiler import ProfileManager
-from pyperfoptimizer.visualizer import Dashboard
-from pyperfoptimizer.optimizer import Recommendations, CodeAnalyzer
 from pyperfoptimizer.utils.io import export_results
+from pyperfoptimizer.visualizer import Dashboard
 
 
 def import_module_from_file(file_path: str) -> Any:
@@ -245,7 +245,7 @@ def parse_args(args: List[str]) -> argparse.Namespace:
     fix_parser.add_argument("--profile", help="Profile data file (py-spy, cProfile, or Scalene) to focus on hot paths")
 
     # Version command
-    version_parser = subparsers.add_parser("version", help="Show version information")
+    subparsers.add_parser("version", help="Show version information")
     
     return parser.parse_args(args)
 
@@ -279,7 +279,7 @@ def main() -> int:
     
     elif args.command == "scan":
         try:
-            from pyperfoptimizer.autofix import scan_file, load_profile
+            from pyperfoptimizer.autofix import load_profile, scan_file
             hot_functions = load_profile(args.profile) if args.profile else None
             optimizations = scan_file(args.file, hot_functions=hot_functions)
             if not optimizations:
@@ -294,6 +294,7 @@ def main() -> int:
     elif args.command == "fix":
         try:
             from pathlib import Path
+
             from pyperfoptimizer.autofix import fix_file, load_profile
             hot_functions = load_profile(args.profile) if args.profile else None
             result = fix_file(args.file, inplace=args.inplace, hot_functions=hot_functions)

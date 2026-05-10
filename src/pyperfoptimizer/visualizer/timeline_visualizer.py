@@ -6,21 +6,20 @@ results, showing the execution flow and timing of functions.
 """
 
 import os
-import json
-from typing import Dict, List, Optional, Any, Union, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 # Try to import visualization libraries
 try:
     import matplotlib
-    import matplotlib.pyplot as plt
     import matplotlib.patches as patches
+    import matplotlib.pyplot as plt
     _HAS_MPL = True
 except ImportError:
     _HAS_MPL = False
 
 try:
-    import plotly.graph_objects as go
     import plotly.express as px
+    import plotly.graph_objects as go
     _HAS_PLOTLY = True
 except ImportError:
     _HAS_PLOTLY = False
@@ -116,7 +115,7 @@ class TimelineVisualizer:
         
         # Define colors for different depths
         colors = plt.cm.viridis(
-            [i / max(1, max(c['depth'] for c in call_data)) for c in call_data]
+            [c['depth'] / max(1, max(c['depth'] for c in call_data)) for c in call_data]
         )
         
         # Get the time range

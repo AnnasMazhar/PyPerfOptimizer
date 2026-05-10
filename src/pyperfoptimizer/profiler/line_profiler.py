@@ -5,14 +5,10 @@ This module integrates with the line_profiler package to provide detailed
 line-by-line execution timing for Python code.
 """
 
-import os
 import io
-import importlib.util
-import tempfile
-import inspect
-import traceback
-from typing import Callable, Dict, List, Optional, Any, Union, TextIO
+import os
 from datetime import datetime
+from typing import Any, Callable, Dict, List, Optional, TextIO
 
 # Check if line_profiler is installed
 try:

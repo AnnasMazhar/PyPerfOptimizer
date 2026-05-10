@@ -1,10 +1,11 @@
 """Tests for autofix patterns."""
 
 import libcst as cst
-import pytest
 
 from pyperfoptimizer.autofix import fix, scan
-from pyperfoptimizer.autofix.patterns.append_to_comprehension import AppendToComprehensionPattern
+from pyperfoptimizer.autofix.patterns.append_to_comprehension import (
+    AppendToComprehensionPattern,
+)
 from pyperfoptimizer.autofix.patterns.loop_invariant import LoopInvariantPattern
 from pyperfoptimizer.autofix.patterns.membership_test import MembershipTestPattern
 from pyperfoptimizer.autofix.patterns.string_concat import StringConcatPattern

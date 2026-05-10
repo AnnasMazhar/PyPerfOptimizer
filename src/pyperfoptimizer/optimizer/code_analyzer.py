@@ -5,15 +5,14 @@ This module provides tools for analyzing Python code to identify
 potential performance issues and optimization opportunities.
 """
 
-import os
 import ast
-import inspect
 import builtins
-import importlib
-import textwrap
-from typing import Dict, List, Set, Tuple, Optional, Any, Union, Callable
+import inspect
+import os
 import re
-import itertools
+import textwrap
+from typing import Callable, Dict, List, Optional
+
 
 class CodeAnalyzer:
     """

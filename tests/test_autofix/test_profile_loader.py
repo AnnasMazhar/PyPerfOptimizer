@@ -2,14 +2,10 @@
 
 import cProfile
 import json
-import pstats
-import tempfile
-from pathlib import Path
 
 import pytest
 
 from pyperfoptimizer.autofix.profile_loader import HotFunction, load_profile
-
 
 # --- Fixtures ---
 
@@ -71,7 +67,7 @@ def pstats_file(tmp_path):
     profiler = cProfile.Profile()
     profiler.enable()
     # Do some work to generate stats
-    total = sum(range(1000))
+    sum(range(1000))
     _ = [x * 2 for x in range(500)]
     profiler.disable()
     profiler.dump_stats(str(p))

@@ -5,16 +5,15 @@ This module provides context managers for easy profiling of code blocks.
 """
 
 import contextlib
-import time
 import os
-from typing import Dict, List, Optional, Any, Union, TextIO, Generator
-import inspect
+from typing import Generator, Optional, TextIO
 
 # Import profilers
 from pyperfoptimizer.profiler.cpu_profiler import CPUProfiler
-from pyperfoptimizer.profiler.memory_profiler import MemoryProfiler
 from pyperfoptimizer.profiler.line_profiler import LineProfiler
+from pyperfoptimizer.profiler.memory_profiler import MemoryProfiler
 from pyperfoptimizer.profiler.profile_manager import ProfileManager
+
 
 @contextlib.contextmanager
 def cpu_profiler(
@@ -237,7 +236,7 @@ def profile_context(
                 filenames = profile_manager.save_stats(save_dir, prefix_value)
                 
                 if print_stats:
-                    print(f"\nProfiling statistics saved to:", file=output)
+                    print("\nProfiling statistics saved to:", file=output)
                     for name, filename in filenames.items():
                         print(f"  {name}: {filename}", file=output)
     except Exception as e:
