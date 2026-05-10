@@ -22,7 +22,7 @@ All benchmarks run 3× for stability. Python 3.11, Ubuntu 24.04. Reproduce with 
 
 ### Real-World Validation
 
-We scanned 3 major open-source projects to verify these patterns exist in production code:
+I scanned 3 major open-source projects to verify these patterns exist in production code:
 
 ```
 Project     Files Scanned    Issues Found    Top Pattern
@@ -128,7 +128,7 @@ Recursive functions like `fib(n)` have O(2ⁿ) call trees. `@lru_cache` stores r
 
 ### Honest Finding: `any()/all()` Is NOT Faster
 
-Our benchmarks revealed that `any(x < 0 for x in items)` is **slower** than a manual `for` loop in CPython due to generator creation overhead. We mark this as readability-only, not a performance improvement. This contradicts common advice — we report what we measure, not what's assumed.
+My benchmarks revealed that `any(x < 0 for x in items)` is **slower** than a manual `for` loop in CPython due to generator creation overhead. I mark this as readability-only, not a performance improvement. This contradicts common advice — I reported what I measure, not what's assumed.
 
 ## Profile-Guided Optimization
 
