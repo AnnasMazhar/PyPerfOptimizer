@@ -296,8 +296,8 @@ def main() -> int:
     
     elif args.command == "scan":
         try:
-            from pyperfoptimizer.autofix import load_profile, scan_file
             from pyperfoptimizer.advisor import Bottleneck, advise_file
+            from pyperfoptimizer.autofix import load_profile, scan_file
 
             hot_functions = load_profile(args.profile) if args.profile else None
             optimizations = scan_file(args.file, hot_functions=hot_functions)
@@ -317,7 +317,7 @@ def main() -> int:
             if compile_candidates:
                 for c in compile_candidates:
                     print(f"  {c.file}:{c.line}  {c.name:<16} {c.compiler.value:<8} {c.estimated_speedup}")
-                    print(f"    Status: eligible")
+                    print("    Status: eligible")
                     action = _compiler_action(c)
                     print(f"    Action: {action}")
             else:
@@ -361,7 +361,7 @@ def main() -> int:
             for c in candidates:
                 if c.eligible:
                     print(f"  {c.file}:{c.line}  {c.name:<16} {c.compiler.value:<8} {c.estimated_speedup}")
-                    print(f"    Status: eligible")
+                    print("    Status: eligible")
                     print(f"    Action: {_compiler_action(c)}")
                 else:
                     print(f"  {c.file}:{c.line}  {c.name:<16} blocked")
