@@ -232,6 +232,16 @@ def parse_args(args: List[str]) -> argparse.Namespace:
     dashboard_parser.add_argument("-d", "--results-dir", required=True, help="Directory with profiling results")
     dashboard_parser.add_argument("-p", "--port", type=int, default=5000, help="Port to use for the dashboard")
     
+    # Scan command
+    scan_parser = subparsers.add_parser("scan", help="Scan for performance anti-patterns")
+    scan_parser.add_argument("file", help="Python file to scan")
+
+    # Fix command
+    fix_parser = subparsers.add_parser("fix", help="Apply auto-optimizations")
+    fix_parser.add_argument("file", help="Python file to optimize")
+    fix_parser.add_argument("--inplace", action="store_true", help="Modify file in-place")
+    fix_parser.add_argument("--verify", action="store_true", help="Benchmark after fixing")
+
     # Version command
     version_parser = subparsers.add_parser("version", help="Show version information")
     
@@ -265,6 +275,40 @@ def main() -> int:
             print(f"Error: {e}")
             return 1
     
+    elif args.command == "scan":
+        try:
+            from pyperfoptimizer.autofix import scan_file
+            optimizations = scan_file(args.file)
+            if not optimizations:
+                print("No optimizations found.")
+            for opt in optimizations:
+                print(f"  L{opt.line}: [{opt.pattern_name}] {opt.description} (expected {opt.expected_speedup})")
+            return 0
+        except Exception as e:
+            print(f"Error: {e}")
+            return 1
+
+    elif args.command == "fix":
+        try:
+            from pathlib import Path
+            from pyperfoptimizer.autofix import fix_file
+            result = fix_file(args.file, inplace=args.inplace)
+            if args.inplace:
+                print(f"Fixed in-place: {args.file}")
+            else:
+                out_path = Path(args.file).with_suffix(".optimized.py")
+                out_path.write_text(result)
+                print(f"Written to: {out_path}")
+            if args.verify:
+                from pyperfoptimizer.autofix.verify import verify
+                original = Path(args.file).read_text()
+                bench = verify(original, result, n=100)
+                print(f"  Speedup: {bench.speedup:.2f}x | {'PASS' if bench.passed else 'FAIL'}")
+            return 0
+        except Exception as e:
+            print(f"Error: {e}")
+            return 1
+
     elif args.command == "version":
         from pyperfoptimizer import __version__
         print(f"PyPerfOptimizer version {__version__}")

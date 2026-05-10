@@ -27,6 +27,7 @@ classifiers = [
 ]
 dependencies = [
     "astor>=0.8.1",
+    "libcst>=1.0.0",
     "line-profiler>=4.1.0",
     "memory-profiler>=0.61.0",
     "matplotlib>=3.7.0",
