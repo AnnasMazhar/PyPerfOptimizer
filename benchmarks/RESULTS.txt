@@ -1,14 +1,14 @@
 Function              Original    Optimized   Speedup   Patterns Applied
 ────────────────────────────────────────────────────────────────────────
-process_records       812.76µs    673.33µs    1.2x      append→comprehension, loop invariant hoist, string concat→join
-fib(30)               136.26ms    72.85ns     1870330.5xauto memoize
-find_valid            102.16µs    31.17µs     3.3x      append→comprehension, membership test set
-parse_lines           517.96µs    417.19µs    1.2x      append→comprehension, loop invariant hoist, unnecessary list
-aggregate             862.91µs    750.16µs    1.2x      string concat→join
-regex_bench           43.47µs     16.23µs     2.7x      regex_precompile
-any_all_bench         144.92µs    378.37µs    0.4x      loop_to_any_all
-dict_get_bench        1.27ms      644.23µs    2.0x      dict_get
-generator_bench       64.60ms     61.71ms     1.0x      generator_instead_of_list
-isinstance_bench      19.35ms     15.54ms     1.2x      multiple_isinstance
+process_records       762.79µs    683.28µs    1.1x      append→comprehension, loop invariant hoist, string concat→join
+fib(30)               133.56ms    72.25ns     1848738.2xauto memoize
+find_valid            106.32µs    31.22µs     3.4x      append→comprehension, membership test set
+parse_lines           540.97µs    468.02µs    1.2x      append→comprehension, loop invariant hoist, unnecessary list
+aggregate             915.38µs    823.55µs    1.1x      string concat→join
+regex_bench           47.07µs     17.93µs     2.6x      regex_precompile
+any_all_bench         152.78µs    412.49µs    0.4x      loop_to_any_all
+dict_get_bench        1.37ms      697.20µs    2.0x      dict_get
+generator_bench       68.94ms     62.56ms     1.1x      generator_instead_of_list
+isinstance_bench      21.38ms     15.63ms     1.4x      multiple_isinstance
 ────────────────────────────────────────────────────────────────────────
 Average speedup: 1.6x (excluding memoization outlier)

@@ -53,9 +53,9 @@ class _Transform(cst.CSTTransformer):
 
 class LoopToAnyAllPattern(Pattern):
     name = "loop_to_any_all"
-    description = "Replace for+if+return True/False with any()/all()"
-    expected_speedup = "1.2-2x"
-    auto_fix = True
+    description = "Replace for+if+return True/False with any()/all() (readability)"
+    expected_speedup = "readability (no speed gain)"
+    auto_fix = False
 
     def detect(self, tree: cst.Module) -> list[Match]:
         wrapper = cst.metadata.MetadataWrapper(tree)
