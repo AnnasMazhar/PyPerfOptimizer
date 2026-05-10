@@ -1,0 +1,88 @@
+======================================================================
+PyPerfOptimizer — Real-World Project Scan Results
+======================================================================
+
+## FastAPI: 35 optimizations found
+   Files scanned: 48
+   Breakdown by pattern:
+     - auto_memoize: 12
+     - loop_to_any_all: 7
+     - loop_invariant_hoist: 4
+     - append_to_comprehension: 4
+     - regex_precompile: 3
+     - defaultdict_opportunity: 3
+     - string_concat_to_join: 2
+
+## Flask: 15 optimizations found
+   Files scanned: 24
+   Breakdown by pattern:
+     - defaultdict_opportunity: 5
+     - loop_invariant_hoist: 5
+     - auto_memoize: 3
+     - multiple_isinstance: 1
+     - regex_precompile: 1
+
+## Django (utils): 36 optimizations found
+   Files scanned: 47
+   Breakdown by pattern:
+     - auto_memoize: 10
+     - loop_invariant_hoist: 8
+     - regex_precompile: 7
+     - append_to_comprehension: 4
+     - defaultdict_opportunity: 3
+     - generator_instead_of_list: 2
+     - unnecessary_list: 1
+     - loop_to_any_all: 1
+
+======================================================================
+TOTAL: 86 optimizations across 3 projects
+======================================================================
+
+## Pattern Breakdown (all projects)
+  auto_memoize: 25
+  loop_invariant_hoist: 17
+  regex_precompile: 11
+  defaultdict_opportunity: 11
+  loop_to_any_all: 8
+  append_to_comprehension: 8
+  string_concat_to_join: 2
+  generator_instead_of_list: 2
+  multiple_isinstance: 1
+  unnecessary_list: 1
+
+## Top 5 Most Impactful Findings (by expected speedup)
+
+  1. [10-1000x for recursive functions] auto_memoize
+     File: fastapi/fastapi/_compat/shared.py:64
+     Memoize recursive function `field_annotation_is_sequence`
+     Code: def field_annotation_is_sequence(...)
+
+  2. [2-10x for hot paths] regex_precompile
+     File: fastapi/fastapi/_compat/v2.py:426
+     re.sub() with string pattern — precompile at module level
+     Code: re.sub(r"[^a-zA-Z0-9.\-_]", "_", name)
+
+  3. [2-10x] string_concat_to_join
+     File: fastapi/fastapi/exceptions.py:206
+     Convert `message +=` loop to `''.join(...)`
+     Code: for err in self._errors:
+
+  4. [1.2-2x] loop_to_any_all
+     File: fastapi/fastapi/_compat/shared.py:67
+     for+if+return pattern → use any()/all()
+     Code: for arg in get_args(annotation):
+
+  5. [1.3-2x] append_to_comprehension
+     File: fastapi/fastapi/dependencies/models.py:57
+     Convert `scopes.append` loop to list comprehension
+     Code: # This doesn't use a set to preserve order, just in case
+
+  6. [1.2-1.5x] defaultdict_opportunity
+     File: fastapi/fastapi/_compat/v2.py:276
+     if-not-in-dict init → use collections.defaultdict
+     Code: if "$ref" not in json_schema:
+
+  7. [1.1-1.5x] multiple_isinstance
+     File: flask/src/flask/app.py:1315
+     Chained isinstance() → isinstance(x, (A, B, ...))
+     Code: isinstance(rv, (str, bytes, bytearray)) or isinstance(rv, cabc.Iterator)

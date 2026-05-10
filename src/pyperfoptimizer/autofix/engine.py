@@ -36,13 +36,17 @@ def scan(source: str, patterns: list[Pattern] | None = None, hot_functions: list
             if not _in_hot_path(match.line, hot_functions):
                 continue
             # Generate optimized code preview
-            transformed = pattern.transform(tree, match)
+            try:
+                transformed = pattern.transform(tree, match)
+                optimized_code = transformed.code[:200]
+            except NotImplementedError:
+                optimized_code = "(detection only — manual fix required)"
             optimizations.append(Optimization(
                 pattern_name=pattern.name,
                 line=match.line,
                 description=match.description,
                 original_code=match.original_code,
-                optimized_code=transformed.code[:200],  # preview
+                optimized_code=optimized_code,
                 expected_speedup=pattern.expected_speedup,
             ))
 

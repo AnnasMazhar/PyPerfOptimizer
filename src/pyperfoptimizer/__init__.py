@@ -10,7 +10,7 @@ This package provides tools for:
 - Code optimization recommendations
 """
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 # Import key components for convenient access
 from pyperfoptimizer.profiler import (
