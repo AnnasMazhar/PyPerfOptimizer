@@ -39,10 +39,10 @@ class TestCPUProfiler(unittest.TestCase):
                 return n
             return fibonacci(n-1) + fibonacci(n-2)
         
-        result = self.profiler.profile_func(fibonacci, 10)
+        result = self.profiler.profile_func(fibonacci, 20)
         
         # Check that the function's result is correct
-        self.assertEqual(result, 55)
+        self.assertEqual(result, 6765)
         
         # Check that profiling data was captured
         stats = self.profiler.get_stats()
@@ -54,7 +54,7 @@ class TestCPUProfiler(unittest.TestCase):
         """Test retrieving profiling statistics."""
         def busy_function():
             result = 0
-            for i in range(10000):
+            for i in range(1000000):
                 result += i
             return result
         
@@ -138,7 +138,7 @@ class TestCPUProfiler(unittest.TestCase):
     def test_clear(self):
         """Test clearing profiling results."""
         def simple_func():
-            return sum(range(1000))
+            return sum(range(1000000))
             
         self.profiler.profile_func(simple_func)
         stats_before = self.profiler.get_stats()

@@ -91,4 +91,6 @@ dmypy.json
 
 # PyPerfOptimizer specific
 profile_results/
-*_dashboard.html
+*_dashboard.html.venv/
+dist/
+*.egg-info/

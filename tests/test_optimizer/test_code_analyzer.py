@@ -192,8 +192,8 @@ def unused_function():
         
     def test_reset(self):
         """Test resetting the analyzer state."""
-        # Analyze some code
-        code = "def example(): return [x for x in range(100)]"
+        # Analyze code that triggers issues
+        code = "def example(data):\n    for i in range(len(data)):\n        pass"
         self.analyzer.analyze_code(code)
         
         # Check that it has results

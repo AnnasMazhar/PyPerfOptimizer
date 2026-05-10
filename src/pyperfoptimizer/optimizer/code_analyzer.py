@@ -10,6 +10,7 @@ import ast
 import inspect
 import builtins
 import importlib
+import textwrap
 from typing import Dict, List, Set, Tuple, Optional, Any, Union, Callable
 import re
 import itertools
@@ -57,7 +58,7 @@ class CodeAnalyzer:
         """
         # Get the source code of the function
         try:
-            source = inspect.getsource(func)
+            source = textwrap.dedent(inspect.getsource(func))
         except (IOError, TypeError):
             self.issues.append({
                 'severity': 'error',
@@ -416,11 +417,11 @@ class CodeVisitor(ast.NodeVisitor):
         self.loops.append(loop_info)
         
         # Check for specific loop patterns
-        iter_name = self._get_call_name(node.iter)
+        iter_name = self._get_call_name(node.iter.func) if isinstance(node.iter, ast.Call) else None
         if iter_name == 'range' and isinstance(node.iter, ast.Call) and len(node.iter.args) == 1:
             # Check for range(len(...)) pattern
             if (isinstance(node.iter.args[0], ast.Call) and 
-                self._get_call_name(node.iter.args[0]) == 'len'):
+                self._get_call_name(node.iter.args[0].func) == 'len'):
                 self.issues.append({
                     'severity': 'info',
                     'message': f"range(len(...)) at line {node.lineno}. Consider using enumerate() for cleaner code.",

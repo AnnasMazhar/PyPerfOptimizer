@@ -103,10 +103,15 @@ class CPUProfiler:
         
         # Extract function-level data
         functions = []
+        in_data = False
         for line in stats_str.split('\n'):
-            if line and not line.startswith('ncalls') and not line.startswith('   '):
-                parts = line.strip().split()
-                if len(parts) >= 6:  # Make sure there are enough columns
+            stripped = line.strip()
+            if stripped.startswith('ncalls'):
+                in_data = True
+                continue
+            if in_data and stripped:
+                parts = stripped.split()
+                if len(parts) >= 6:
                     try:
                         func_data = {
                             'ncalls': parts[0],
