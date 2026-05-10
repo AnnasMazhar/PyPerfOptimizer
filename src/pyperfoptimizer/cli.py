@@ -237,6 +237,11 @@ def parse_args(args: List[str]) -> argparse.Namespace:
     scan_parser.add_argument("file", help="Python file to scan")
     scan_parser.add_argument("--profile", help="Profile data file (py-spy, cProfile, or Scalene) to focus on hot paths")
 
+    # Advise command
+    advise_parser = subparsers.add_parser("advise", help="Show compilation recommendations for a file")
+    advise_parser.add_argument("file", help="Python file to analyze")
+    advise_parser.add_argument("--profile", help="Profile data JSON file ({func_name: time_pct})")
+
     # Fix command
     fix_parser = subparsers.add_parser("fix", help="Apply auto-optimizations")
     fix_parser.add_argument("file", help="Python file to optimize")
@@ -248,6 +253,18 @@ def parse_args(args: List[str]) -> argparse.Namespace:
     subparsers.add_parser("version", help="Show version information")
     
     return parser.parse_args(args)
+
+
+def _compiler_action(candidate) -> str:
+    """Return a specific command for the recommended compiler."""
+    from pyperfoptimizer.advisor import Compiler
+    if candidate.compiler == Compiler.NUMBA:
+        return f"Add @numba.jit(nopython=True) to {candidate.name}"
+    elif candidate.compiler == Compiler.MYPYC:
+        return f"mypyc {candidate.file}"
+    elif candidate.compiler == Compiler.CYTHON:
+        return f"cythonize {candidate.file}"
+    return "No action available"
 
 
 def main() -> int:
@@ -280,12 +297,84 @@ def main() -> int:
     elif args.command == "scan":
         try:
             from pyperfoptimizer.autofix import load_profile, scan_file
+            from pyperfoptimizer.advisor import Bottleneck, advise_file
+
             hot_functions = load_profile(args.profile) if args.profile else None
             optimizations = scan_file(args.file, hot_functions=hot_functions)
-            if not optimizations:
-                print("No optimizations found.")
-            for opt in optimizations:
-                print(f"  L{opt.line}: [{opt.pattern_name}] {opt.description} (expected {opt.expected_speedup})")
+            candidates = advise_file(args.file)
+
+            # Tier 1: Source Fixes
+            print("\n\u2501\u2501\u2501 Source Fixes (auto-fixable) \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501")
+            if optimizations:
+                for opt in optimizations:
+                    print(f"  {args.file}:{opt.line}  {opt.pattern_name:<20} {opt.expected_speedup}")
+            else:
+                print("  No auto-fixable patterns found.")
+
+            # Tier 2: Compilation Candidates
+            print("\n\u2501\u2501\u2501 Compilation Candidates \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501")
+            compile_candidates = [c for c in candidates if c.eligible]
+            if compile_candidates:
+                for c in compile_candidates:
+                    print(f"  {c.file}:{c.line}  {c.name:<16} {c.compiler.value:<8} {c.estimated_speedup}")
+                    print(f"    Status: eligible")
+                    action = _compiler_action(c)
+                    print(f"    Action: {action}")
+            else:
+                blocked = [c for c in candidates if not c.eligible and c.blockers]
+                if blocked:
+                    for c in blocked:
+                        print(f"  {c.file}:{c.line}  {c.name:<16} blocked")
+                        print(f"    Status: blocked ({'; '.join(c.blockers[:2])})")
+                else:
+                    print("  No compilation candidates found.")
+
+            # Tier 3: Architecture Suggestions
+            print("\n\u2501\u2501\u2501 Architecture Suggestions \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501")
+            io_bound = [c for c in candidates if c.bottleneck == Bottleneck.IO_BOUND]
+            if io_bound:
+                for c in io_bound:
+                    print(f"  {c.file}:{c.line}  {c.name:<16} convert to async (I/O bound)")
+            else:
+                print("  No architecture suggestions.")
+
+            print()
+            return 0
+        except Exception as e:
+            print(f"Error: {e}")
+            return 1
+
+    elif args.command == "advise":
+        try:
+            import json
+
+            from pyperfoptimizer.advisor import Bottleneck, advise_file
+
+            profile_data = None
+            if args.profile:
+                with open(args.profile) as f:
+                    profile_data = json.load(f)
+
+            candidates = advise_file(args.file, profile_data=profile_data)
+
+            print("\n\u2501\u2501\u2501 Compilation Candidates \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501")
+            for c in candidates:
+                if c.eligible:
+                    print(f"  {c.file}:{c.line}  {c.name:<16} {c.compiler.value:<8} {c.estimated_speedup}")
+                    print(f"    Status: eligible")
+                    print(f"    Action: {_compiler_action(c)}")
+                else:
+                    print(f"  {c.file}:{c.line}  {c.name:<16} blocked")
+                    print(f"    Status: blocked ({'; '.join(c.blockers[:2])})")
+
+            # Architecture suggestions
+            io_bound = [c for c in candidates if c.bottleneck == Bottleneck.IO_BOUND]
+            if io_bound:
+                print("\n\u2501\u2501\u2501 Architecture Suggestions \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501")
+                for c in io_bound:
+                    print(f"  {c.file}:{c.line}  {c.name:<16} convert to async (I/O bound)")
+
+            print()
             return 0
         except Exception as e:
             print(f"Error: {e}")
