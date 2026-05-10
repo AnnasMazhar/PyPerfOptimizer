@@ -339,7 +339,7 @@ def main() -> int:
                 print("  No architecture suggestions.")
 
             print()
-            return 0
+            return 1 if optimizations else 0
         except Exception as e:
             print(f"Error: {e}")
             return 1
