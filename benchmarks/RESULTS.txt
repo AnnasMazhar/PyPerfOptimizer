@@ -1,0 +1,9 @@
+Function              Original    Optimized   Speedup   Patterns Applied
+────────────────────────────────────────────────────────────────────────
+process_records       756.28µs    669.11µs    1.1x      append→comprehension, loop invariant hoist, string concat→join
+fib(30)               129.29ms    73.53ns     1758293.6xauto memoize
+find_valid            103.34µs    30.41µs     3.4x      append→comprehension, membership test set
+parse_lines           537.38µs    424.32µs    1.3x      append→comprehension, loop invariant hoist, unnecessary list
+aggregate             860.73µs    756.97µs    1.1x      string concat→join
+────────────────────────────────────────────────────────────────────────
+Average speedup: 1.7x (excluding memoization outlier)

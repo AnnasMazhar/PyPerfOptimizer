@@ -235,12 +235,14 @@ def parse_args(args: List[str]) -> argparse.Namespace:
     # Scan command
     scan_parser = subparsers.add_parser("scan", help="Scan for performance anti-patterns")
     scan_parser.add_argument("file", help="Python file to scan")
+    scan_parser.add_argument("--profile", help="Profile data file (py-spy, cProfile, or Scalene) to focus on hot paths")
 
     # Fix command
     fix_parser = subparsers.add_parser("fix", help="Apply auto-optimizations")
     fix_parser.add_argument("file", help="Python file to optimize")
     fix_parser.add_argument("--inplace", action="store_true", help="Modify file in-place")
     fix_parser.add_argument("--verify", action="store_true", help="Benchmark after fixing")
+    fix_parser.add_argument("--profile", help="Profile data file (py-spy, cProfile, or Scalene) to focus on hot paths")
 
     # Version command
     version_parser = subparsers.add_parser("version", help="Show version information")
@@ -277,8 +279,9 @@ def main() -> int:
     
     elif args.command == "scan":
         try:
-            from pyperfoptimizer.autofix import scan_file
-            optimizations = scan_file(args.file)
+            from pyperfoptimizer.autofix import scan_file, load_profile
+            hot_functions = load_profile(args.profile) if args.profile else None
+            optimizations = scan_file(args.file, hot_functions=hot_functions)
             if not optimizations:
                 print("No optimizations found.")
             for opt in optimizations:
@@ -291,8 +294,9 @@ def main() -> int:
     elif args.command == "fix":
         try:
             from pathlib import Path
-            from pyperfoptimizer.autofix import fix_file
-            result = fix_file(args.file, inplace=args.inplace)
+            from pyperfoptimizer.autofix import fix_file, load_profile
+            hot_functions = load_profile(args.profile) if args.profile else None
+            result = fix_file(args.file, inplace=args.inplace, hot_functions=hot_functions)
             if args.inplace:
                 print(f"Fixed in-place: {args.file}")
             else:
