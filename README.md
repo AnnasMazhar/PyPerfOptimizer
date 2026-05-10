@@ -22,7 +22,7 @@ Every number below was measured 3× for stability on Python 3.11/3.12, Ubuntu 24
 
 ### Patterns That Don't Help (on CPython 3.11+)
 
-We tested these and they gave negligible or zero improvement on real framework code:
+I tested these and they gave negligible or zero improvement on real framework code:
 
 | Pattern | Measured | Why |
 |---------|----------|-----|
@@ -32,7 +32,7 @@ We tested these and they gave negligible or zero improvement on real framework c
 | String `+=` → `join()` | **1.1-1.2×** | CPython 3.11 does in-place resize when refcount=1 |
 | Append loop → comprehension | **1.2×** | Real but marginal |
 
-### What We Found in Real Frameworks
+### What I Found in Real Frameworks
 
 ```
 Project     Files Scanned    Fixable Issues    Speedup on Fixed Code
@@ -70,11 +70,11 @@ pyperfoptimizer scan myapp.py --profile profile.speedscope
 - A detector of **specific, proven** performance waste patterns
 - Safe: 0% break rate across 76 files in 4 major frameworks
 - Honest: reports measured speedups, not theoretical claims
-- Focused: does 2 things well (regex precompile, set membership) rather than 17 things poorly
+- Focused: does 2 things well (regex precompile, set membership) 
 
 ## What This Tool Is Not
 
-- Not a general-purpose Python accelerator (CPython's interpreter is the bottleneck, not your code patterns)
+- Not a general-purpose Python accelerator (CPython's interpreter is the bottleneck, not code patterns)
 - Not a replacement for profiling (use py-spy or Scalene first)
 - Not a compiler (use mypyc for 1.4-2.8× on typed compute-heavy code)
 - Not magic (most Python performance problems are architectural — N+1 queries, redundant serialization, unnecessary copies — and require human judgment to fix)
@@ -89,7 +89,7 @@ pyperfoptimizer scan myapp.py --profile profile.speedscope
 
 4. **mypyc compilation gives 1.4-2.8×** on typed, compute-heavy code — but fails on complex code with dynamic features, and gives ~1× on data-structure-heavy code.
 
-## Reproducing Our Results
+## Reproducing My Results
 
 ```bash
 git clone https://github.com/AnnasMazhar/PyPerfOptimizer
