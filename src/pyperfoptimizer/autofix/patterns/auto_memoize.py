@@ -184,7 +184,19 @@ class _EnsureFunctoolsImport(cst.CSTTransformer):
         import_stmt = cst.SimpleStatementLine(body=[
             cst.Import(names=[cst.ImportAlias(name=cst.Name("functools"))])
         ])
-        return updated_node.with_changes(body=[import_stmt, *updated_node.body])
+        # Insert after __future__ imports and module docstring
+        body = list(updated_node.body)
+        insert_idx = 0
+        for i, stmt in enumerate(body):
+            if isinstance(stmt, cst.SimpleStatementLine):
+                for item in stmt.body:
+                    if isinstance(item, (cst.ImportFrom, cst.Import)):
+                        insert_idx = i + 1
+                    elif isinstance(item, cst.Expr) and isinstance(item.value, (cst.SimpleString, cst.ConcatenatedString, cst.FormattedString)):
+                        insert_idx = i + 1  # skip docstring
+            elif isinstance(stmt, cst.BaseCompoundStatement):
+                break
+        return updated_node.with_changes(body=[*body[:insert_idx], import_stmt, *body[insert_idx:]])
 
 
 class AutoMemoizePattern(Pattern):
